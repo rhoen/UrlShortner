@@ -14,6 +14,7 @@ class ShortenedUrl < ActiveRecord::Base
     primary_key: :id
 
   has_many :visitors,
+    Proc.new { distinct },
     through: :visits,
     source: :visitor
 
@@ -31,6 +32,17 @@ class ShortenedUrl < ActiveRecord::Base
     create!(submitter_user_id: user.id, short_url: random_code, long_url: long_url)
   end
 
+  def num_clicks
+    visits.count
+  end
 
+  def num_uniques
+    visitors.count
+    #visits.select(:visitor_user_id).distinct.count
+  end
+
+  def num_recent_uniques
+    visits.select(:visitor_user_id).distinct.where("created_at > '#{Time.now("-05:00") - 10.minutes}'").count
+  end
 
 end
