@@ -12,8 +12,8 @@ class Visit < ActiveRecord::Base
     foreign_key: :shortened_url_id,
     primary_key: :id
 
-  def self.record_visit!(user, shortened_url)
-    create!(shortened_url_id: shortened_url.id, visitor_user_id: user.id)
+  def self.record_visit!(options)
+    create!(shortened_url_id: options[:shortened_url].id, visitor_user_id: options[:user].id)
   end
 
 end
