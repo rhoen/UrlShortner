@@ -28,8 +28,8 @@ class ShortenedUrl < ActiveRecord::Base
     code
   end
 
-  def self.create_for_user_and_long_url!(user, long_url)
-    create!(submitter_user_id: user.id, short_url: random_code, long_url: long_url)
+  def self.create_for_user_and_long_url!(options)
+    create!(submitter_user_id: options[:user].id, short_url: random_code, long_url: options[:long_url])
   end
 
   def num_clicks

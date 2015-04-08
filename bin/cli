@@ -1,0 +1,22 @@
+puts "input your email"
+email = gets.chomp
+  if User.find_by_email(email).nil?
+    user = User.new email: email 
+  else
+    user = User.find_by_email(email)
+  end
+puts "whata wanna do?"
+puts "0. Create shortened URL \n
+1. Visit shortened URL \n"
+
+choice = gets.chomp
+
+if choice == 0
+  puts "u suk"
+  puts "tyep in your long yrul"
+  long_url = gets.chomp
+  ShortenedUrl.
+
+
+else
+puts 'you still suk'
